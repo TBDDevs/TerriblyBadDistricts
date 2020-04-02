@@ -1,3 +1,5 @@
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/itscamlong/TerriblyBadDistricts) 
+
 # Terribly Bad Districts
 
 **Please make any changes in your own branch and pull request when ready to merge.**
