@@ -1,0 +1,5 @@
+image:
+  file: .gitpod.Dockerfile
+tasks:
+  - init: conda env create -n tbd -f environment.yml
+    command: conda activate tbd
