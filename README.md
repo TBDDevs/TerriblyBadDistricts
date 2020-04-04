@@ -1,3 +1,5 @@
+[![Run on Repl.it](https://repl.it/badge/github/itscamlong/TerriblyBadDistricts)](https://repl.it/github/itscamlong/TerriblyBadDistricts)
+
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/itscamlong/TerriblyBadDistricts) 
 
 # Terribly Bad Districts
@@ -6,7 +8,7 @@
 
 ## How to setup for development
 1. Clone this repository to your machine.
-2. Create your conda environment w/ `conda create -n tbd -f environment.yml`
+2. Create your conda environment w/ `conda env create -n tbd -f environment.yml`
 3. Switch to your newly created environment w/ `conda activate tbd`
 
 That's it!
