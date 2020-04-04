@@ -1,11 +1,15 @@
 from flask import Flask, render_template
+import folium as fol
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():
-    return render_template('index.html')
+def index():
+    base = fol.Map(location=[39.0457549, -76.6413], zoom_start=8)
+    fol.GeoJson('maryland-congressional-districts.geojson').add_to(base)
+    base.save('templates/base_map.html')
+    return render_template('index.html', base=base)
 
 
 if __name__ == '__main__':
