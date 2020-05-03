@@ -47,7 +47,7 @@ def index():
             if nonFavoredCount > 2:
                 predOut.loc[i, "dissolvefield"] = NON_FAVORED_PARTY
 
-    print("STARTING DISSOLVE)
+    print("STARTING DISSOLVE")
     dissolved = predOut.dissolve(by='dissolvefield')
     print("Dissolve done.")
 
