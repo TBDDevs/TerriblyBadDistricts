@@ -34,7 +34,7 @@ def index():
     print("Splitting up favored party districts by county, with randomization...")
     for i, row in predOut.iterrows():
         if row["partynum"] == FAVORED_PARTY:
-            county = int(row["CNTY2010 dgeopandas store counties as a graph"])
+            county = int(row["CNTY2010"])
             if random.randint(0,2) == 0:
                 county += 1
             predOut.loc[i, "dissolvefield"] = county
@@ -47,9 +47,10 @@ def index():
             if nonFavoredCount > 2:
                 predOut.loc[i, "dissolvefield"] = NON_FAVORED_PARTY
 
-    print("STARTING DISSOLVE")
+    print("STARTING DISSOLVE...")
     dissolved = predOut.dissolve(by='dissolvefield')
     print("Dissolve done.")
+    #print(dissolved)
 
     print("Rendering map...")
     fol.Choropleth(

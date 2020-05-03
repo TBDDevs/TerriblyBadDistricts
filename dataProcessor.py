@@ -20,3 +20,4 @@ df.loc[df['PNHB'] < 20, 'partynum'] = 1
 print(df.head())
 
 print(df['party'].value_counts())
+
