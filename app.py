@@ -8,13 +8,13 @@ app = Flask(__name__)
 def index():
     base = fol.Map(location=[39.0457549, -76.6413], zoom_start=8)
     fol.GeoJson('maryland-congressional-districts.geojson').add_to(base)
-    base.save('templates/base_map.html')
+    base.save('templates/dem_map.html')
     return render_template('index.html')
 
 
-@app.route('/base_map')
+@app.route('/dem_map')
 def base_map():
-    return render_template('base_map.html')
+    return render_template('dem_map.html')
 
 
 if __name__ == '__main__':
