@@ -20,6 +20,7 @@ def getData():
     url = "https://opendata.arcgis.com/datasets/bbe7d09a81fc40c8a7c9f4c80155842e_0.geojson"
     df = geopandas.read_file(url)
 
+
     # classifies instances by party
     df["party"] = df.apply(classifier, axis=1)
 
