@@ -17,9 +17,6 @@ def index():
     print("Creating map...")
     base = fol.Map(location=[39.0457549, -76.6413], zoom_start=8)
 
-    #fol.GeoJson('bbe7d09a81fc40c8a7c9f4c80155842e_0.geojson').add_to(base)
-    #print(dataProcessor.df.head())
-
     print("Taking subset...")
     predOut = dataProcessor.df[["partynum", "geometry", "FID", "CNTY2010"]]
 
@@ -50,7 +47,6 @@ def index():
     print("STARTING DISSOLVE...")
     dissolved = predOut.dissolve(by='dissolvefield')
     print("Dissolve done.")
-    #print(dissolved)
 
     print("Rendering map...")
     fol.Choropleth(
