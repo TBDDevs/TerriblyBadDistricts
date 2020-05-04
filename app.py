@@ -27,7 +27,7 @@ def index():
     predOut["dissolvefield"] = predOut["partynum"]
 
     # WHICH PARTY SHOULD WIN?
-    FAVORED_PARTY = REPUBLICAN_PARTY
+    FAVORED_PARTY = DEMOCRATIC_PARTY
 
     NON_FAVORED_PARTY = DEMOCRATIC_PARTY if FAVORED_PARTY == REPUBLICAN_PARTY else REPUBLICAN_PARTY
 
@@ -63,7 +63,7 @@ def index():
     ).add_to(base)
     fol.LayerControl().add_to(base)
 
-    base.save('templates/base_map.html')
+    base.save('templates/democratic_map.html')
     return render_template('index.html')
 
 
