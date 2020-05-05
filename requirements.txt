@@ -25,7 +25,6 @@ pyproj==1.9.6
 python-dateutil==2.8.1
 pytz==2019.3
 requests==2.23.0
-Rtree==0.9.3
 Shapely==1.6.4.post1
 six==1.14.0
 tornado==6.0.4
