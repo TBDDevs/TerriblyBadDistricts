@@ -20,5 +20,10 @@ def dem_map():
     return render_template('democratic_map.html')
 
 
+@app.route('/republican_map')
+def rep_map():
+    return render_template('republican_map.html')
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
