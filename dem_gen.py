@@ -17,7 +17,7 @@ def generate():
     predOut = dataProcessor.getData()
 
     print("Applying default dissolve field (party number)...")
-    predOut["dissolvefield"] = predOut["party"]
+    predOut["dissolvefield"] = predOut["partynum"]
 
     # WHICH PARTY SHOULD WIN?
     FAVORED_PARTY = DEMOCRATIC_PARTY
@@ -26,7 +26,7 @@ def generate():
 
     print("Splitting up favored party districts by county, with randomization...")
     for i, row in predOut.iterrows():
-        if row["party"] == FAVORED_PARTY:
+        if row["partynum"] == FAVORED_PARTY:
             county = int(row["CNTY2010"])
             if random.randint(0,2) == 0:
                 county += 1
@@ -34,9 +34,9 @@ def generate():
 
     print("Merging nearby non-favored party districts...")
     for i, row in predOut.iterrows():
-        if row["party"] == FAVORED_PARTY:
+        if row["partynum"] == FAVORED_PARTY:
             neighbours = predOut[predOut.geometry.touches(row['geometry'])]
-            nonFavoredCount = len(neighbours) - list(neighbours["party"]).count(FAVORED_PARTY)
+            nonFavoredCount = len(neighbours) - list(neighbours["partynum"]).count(FAVORED_PARTY)
             if nonFavoredCount > 2:
                 predOut.loc[i, "dissolvefield"] = NON_FAVORED_PARTY
 
@@ -50,7 +50,7 @@ def generate():
             geo_data = dissolved,
             data = dissolved,
             key_on = "feature.properties.FID",
-            columns = ["FID", "party"],
+            columns = ["FID", "partynum"],
             fill_color = "Accent"
     ).add_to(base)
     fol.LayerControl().add_to(base)
