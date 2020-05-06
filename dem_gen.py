@@ -2,7 +2,7 @@ import folium as fol
 import random
 import pandas
 import dataProcessor
-
+import shapely
 REPUBLICAN_PARTY = 1
 DEMOCRATIC_PARTY = 0
 
@@ -37,13 +37,22 @@ def generate():
         if row["partynum"] == FAVORED_PARTY:
             neighbours = predOut[predOut.geometry.touches(row['geometry'])]
             nonFavoredCount = len(neighbours) - list(neighbours["partynum"]).count(FAVORED_PARTY)
-            if nonFavoredCount > 2:
+            favoredCount = len(neighbours) - list(neighbours["partynum"]).count(NON_FAVORED_PARTY)
+            if nonFavoredCount > 0:
                 predOut.loc[i, "dissolvefield"] = NON_FAVORED_PARTY
+
+            if favoredCount > 0:
+                predOut.loc[i, "dissolvefield"] = FAVORED_PARTY
+
+    print(len(predOut))
+
+
 
     print("STARTING DISSOLVE...")
     dissolved = predOut.dissolve(by='dissolvefield')
     print("Dissolve done.")
 
+    print(dissolved)
     print("Rendering map...")
     fol.Choropleth(
             name = "dataproc",
