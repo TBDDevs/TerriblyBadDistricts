@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 import dem_gen
-
+import i_dont_wanna_work_on_this_anymore
 
 app = Flask(__name__)
 
@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.before_first_request
 def start():
     dem_gen.generate()
-
+    i_dont_wanna_work_on_this_anymore.generate_dem_map()
 
 @app.route('/')
 def index():
