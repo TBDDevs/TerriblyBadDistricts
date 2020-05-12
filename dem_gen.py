@@ -27,7 +27,7 @@ swprint.time = datetime.datetime.now()
 def generate():
 
     # WHICH PARTY SHOULD WIN?
-    FAVORED_PARTY = DEMOCRATIC_PARTY
+    FAVORED_PARTY = REPUBLICAN_PARTY
 
     NON_FAVORED_PARTY = DEMOCRATIC_PARTY if FAVORED_PARTY == REPUBLICAN_PARTY else REPUBLICAN_PARTY
 
@@ -118,11 +118,13 @@ def generate():
     swprint("Moving into new GeoDataFrame...")
     mergedFrame = geopandas.GeoDataFrame()
     mergedFrame["geometry"] = geopandas.GeoSeries(shapely.geometry.Polygon(merged.exterior))
+
+    mergedFrame["geometry"] = geopandas.GeoSeries
     mergedFrame["FID"] = 1
     mergedFrame["partynum"] = NON_FAVORED_PARTY
     mergedFrame.crs = disFilt.crs
 
-    #mergedFrame = geopandas.read_file("temp/bigDemDistrict.shp")
+    mergedFrame = geopandas.read_file("temp/bigDemDistrict.shp")
 
     swprint("Reading Maryland boundary shapefile...")
     allOfMd = geopandas.read_file("temp/mdbound.shp")
@@ -153,16 +155,31 @@ def generate():
         combinedDistricts.at[i, "FID"] = i
 
     swprint("Rendering map...")
+    print(" ")
+    print(combinedDistricts)
+    
+    combinedDistrictsSorted = combinedDistricts.sort_values(by="area")
+
+    print(combinedDistrictsSorted)
+
+    partynum = [1.1, 1.11, 1.11, 1.11, 1.12, 1.12, 1.12, 1.12, 1.2, 2]
+
+    combinedDistrictsSorted["partynum"] = partynum
+    combinedDistrictsSorted["FID"] = partynum
+
+    print("sorted combined")
+    print(combinedDistrictsSorted)
     fol.Choropleth(
             name = "dataproc",
-            geo_data = combinedDistricts,
-            data = combinedDistricts,
+            geo_data = combinedDistrictsSorted,
+            data = combinedDistrictsSorted,
             key_on = "feature.properties.partynum",
             columns = ["partynum", "FID"],
-            fill_color = "BuGn"
-            #bins = len(combinedDistricts)
-    ).add_to(base)
+            fill_color = "RdBu",
+        ).add_to(base)
     fol.LayerControl().add_to(base)
+    
+
 
     swprint("Gerrymandering and rendering process completed.")
     print("")
@@ -171,4 +188,4 @@ def generate():
     print("Total elapsed time:", elapsedMinutes, "minutes,", elapsedSeconds, "seconds.")
     print("")
 
-    base.save('templates/democratic_map.html')
+    base.save('templates/republican_map.html')
